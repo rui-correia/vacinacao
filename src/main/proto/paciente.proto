@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.braz.rui";
+option java_outer_classname = "Paciente";
+import "google/protobuf/empty.proto";
+
+package br.com.braz.rui;
+
+service PacienteService {
+  rpc criarPaciente (PacienteRequest) returns (google.protobuf.Empty) {}
+}
+
+message PacienteRequest {
+  string nome = 1;
+  string email = 2;
+  string cpf = 3;
+  string dataNascimento = 4;
+
+}
