@@ -9,6 +9,11 @@ package br.com.braz.rui;
 
 service PacienteService {
   rpc criarPaciente (PacienteRequest) returns (google.protobuf.Empty) {}
+  rpc buscarPaciente(BuscarPacienteRequest) returns (PacienteResponse) {}
+}
+
+message BuscarPacienteRequest{
+  int64 id = 1;
 }
 
 message PacienteRequest {
@@ -17,4 +22,9 @@ message PacienteRequest {
   string cpf = 3;
   string dataNascimento = 4;
 
+}
+
+message PacienteResponse{
+  string nome = 1;
+  string email = 2;
 }

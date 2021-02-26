@@ -1,7 +1,7 @@
 package br.com.braz.rui.write.adapter.`in`
 
-import br.com.braz.rui.PacienteRequest
-import br.com.braz.rui.PacienteServiceGrpcKt
+import br.com.braz.rui.*
+import br.com.braz.rui.write.application.service.BuscarPacienteHandler
 import br.com.braz.rui.write.application.service.CriarPacienteCommand
 import br.com.braz.rui.write.application.service.CriarPacienteHandler
 import com.google.protobuf.Empty
@@ -9,7 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PacienteEndpoint(
-    private val handler: CriarPacienteHandler
+    private val criarPacienteHandler: CriarPacienteHandler,
+    private val buscarPacienteHandler: BuscarPacienteHandler
 ) : PacienteServiceGrpcKt.PacienteServiceCoroutineImplBase() {
     override suspend fun criarPaciente(request: PacienteRequest): Empty {
 
@@ -19,8 +20,14 @@ class PacienteEndpoint(
             request.cpf,
             request.dataNascimento
         )
-        handler.handle(command)
+        criarPacienteHandler.criarPacienteHandle(command)
 
         return Empty.newBuilder().build()
     }
+
+    override suspend fun buscarPaciente(request: BuscarPacienteRequest): PacienteResponse {
+
+        return buscarPacienteHandler.buscarPaciente(request).toResponse()
+    }
+
 }

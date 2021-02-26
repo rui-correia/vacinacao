@@ -7,7 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class CriarPacienteHandler(private val repository: PacienteRepository) {
 
-    fun handle(command: CriarPacienteCommand) {
+    fun criarPacienteHandle(command: CriarPacienteCommand) {
         repository.save(
             Paciente(
                 nome = command.nome,

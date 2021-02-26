@@ -1,5 +1,6 @@
 package br.com.braz.rui.write.application.domain
 
+import br.com.braz.rui.PacienteResponse
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -22,4 +23,13 @@ data class Paciente(
     var cpf: String,
     @field:NotNull
     var dataNascimento: String
-)
+) {
+    fun toResponse(): PacienteResponse {
+        return PacienteResponse.newBuilder()
+            .setNome(this.email)
+            .setEmail(this.email)
+            .build()
+    }
+}
+
+
